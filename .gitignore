@@ -316,4 +316,7 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+# VSCode Workspace Config
+*.code-workspace
+
 # End of https://www.toptal.com/developers/gitignore/api/node
