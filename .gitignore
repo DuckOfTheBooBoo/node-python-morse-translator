@@ -319,4 +319,7 @@ dist
 # VSCode Workspace Config
 *.code-workspace
 
+# ESLint Config
+.eslintrc.json
+
 # End of https://www.toptal.com/developers/gitignore/api/node
