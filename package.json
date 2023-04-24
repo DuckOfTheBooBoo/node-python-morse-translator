@@ -1,0 +1,11 @@
+{
+  "name": "node-python-morse-translator",
+  "version": "1.0.0",
+  "description": "A web app that use Hapi.js as web framework and Python for morse code translating",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arajdian Altaf",
+  "license": "ISC"
+}
