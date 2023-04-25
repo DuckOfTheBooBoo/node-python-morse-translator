@@ -4,7 +4,8 @@
   "description": "A web app that use Hapi.js as web framework and Python for morse code translating",
   "main": "index.js",
   "scripts": {
-    "start-dev": "node ./src/server.js"
+    "start-dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "author": "Arajdian Altaf",
   "license": "ISC",
@@ -14,6 +15,9 @@
     "eslint-plugin-import": "^2.27.5"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.3.1"
+    "@hapi/hapi": "^21.3.1",
+    "@hapi/vision": "^7.0.1",
+    "handlebars": "^4.7.7",
+    "nodemon": "^2.0.22"
   }
 }

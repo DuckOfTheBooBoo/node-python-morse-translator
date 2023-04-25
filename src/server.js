@@ -1,5 +1,4 @@
 const Hapi = require('@hapi/hapi');
-const routes = require('./routes');
 
 const init = async () => {
 
@@ -8,7 +7,25 @@ const init = async () => {
     host: 'localhost',
   });
 
-  server.route(routes);
+  await server.register({
+    // eslint-disable-next-line global-require
+    plugin: require('@hapi/vision'),
+  });
+  
+  server.views({
+    engines: {
+      // eslint-disable-next-line global-require
+      html: require('handlebars'),
+    },
+    relativeTo: __dirname,
+    path: '../templates',
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => h.view('index'),
+  });
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
