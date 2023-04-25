@@ -197,4 +197,7 @@ function morseToText(morseCodeString) {
   return '';
 }
 
-
+module.exports = {
+  textToMorse,
+  morseToText,
+};
