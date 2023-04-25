@@ -1,5 +1,5 @@
 const { objectKeys } = require('./utils');
-const { MorseCodeNotFound, MorseCodeError} = require('./morse-code-error')
+const { MorseCodeNotFound, MorseCodeError } = require('./morse-code-error');
 
 /* eslint-disable quote-props */
 const MORSE_TO_CHAR = {
