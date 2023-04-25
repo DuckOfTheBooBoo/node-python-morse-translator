@@ -1,3 +1,6 @@
+const { objectKeys } = require("./utils");
+const fs = require('fs');
+
 /* eslint-disable quote-props */
 const MORSE_TO_CHAR = {
   '.-': 'A',
@@ -57,7 +60,7 @@ const MORSE_TO_CHAR = {
   '/': ' ',
 };
 
-const CHAR_TO_MORSE_DICT = {
+const CHAR_TO_MORSE = {
   'A': '.-', 
   'B': '-...', 
   'C': '-.-.', 
@@ -115,6 +118,37 @@ const CHAR_TO_MORSE_DICT = {
   ' ': '/',
 };
 
-function textToMorse(text) {}
+/**
+ * 
+ * @param {String} text String containing text to convert into morse code
+ */
+function textToMorse(text) {
+  if (text) {
+    const upText = text.toUpperCase();
+    
+    const morseCodeList = [];
 
-function morseToText(morse) {}
+    for (let i = 0; i < upText.length; i += 1) {
+      const currChar = upText.charAt(i);
+
+      if (objectKeys(CHAR_TO_MORSE).includes(currChar)) {
+        morseCodeList.push(CHAR_TO_MORSE[currChar]);
+        morseCodeList.push(' ');
+      }
+    }
+
+    morseCodeList.pop();
+
+    let morseCodeString = '';
+
+    morseCodeList.forEach((morseCode) => {
+      morseCodeString += morseCode;
+    });
+
+    return morseCodeString;
+  }
+
+  return '';
+}
+
+// function morseToText(morse) {}
