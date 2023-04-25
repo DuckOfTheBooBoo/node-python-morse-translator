@@ -1,5 +1,5 @@
 const { objectKeys } = require('./utils');
-const fs = require('fs');
+const { MorseCodeNotFound, MorseCodeError} = require('./morse-code-error')
 
 /* eslint-disable quote-props */
 const MORSE_TO_CHAR = {
@@ -134,6 +134,8 @@ function textToMorse(text) {
       if (objectKeys(CHAR_TO_MORSE).includes(currChar)) {
         morseCodeList.push(CHAR_TO_MORSE[currChar]);
         morseCodeList.push(' ');
+      } else {
+        throw new MorseCodeNotFound(`INVALID CHAR: ${currChar}`);
       }
     }
 
@@ -170,7 +172,12 @@ function morseToText(morseCodeString) {
 
         if (objectKeys(MORSE_TO_CHAR).includes(morseCode)) {
           text.push(MORSE_TO_CHAR[morseCode]);
-        } 
+        } else if (morseCode === '') {
+          // eslint-disable-next-line no-empty, no-lone-blocks
+          {}
+        } else {
+          throw new MorseCodeError(`INVALID MORSE CODE: ${morseCode}`);
+        }
       }
 
       if (wordIndex !== morseWords.length - 1) {
@@ -189,3 +196,5 @@ function morseToText(morseCodeString) {
 
   return '';
 }
+
+
