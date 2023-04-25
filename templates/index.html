@@ -92,5 +92,29 @@
         </div>
 
     </div>
+
+
+    <script>
+        
+        const playBtn = document.getElementById('btn-play');
+        const inText = document.getElementById('txta-text');
+        const inMorse = document.getElementById('txta-morse');
+
+        inText.addEventListener('input', (event) => {
+
+            if (inMorse.value !== '') {
+                inMorse.value = '';
+            }
+        });
+        
+        inMorse.addEventListener('input', (event) => {
+
+            if (inText.value !== '') {
+                inText.value = '';
+            }
+        });
+
+
+    </script>
 </body>
 </html>
