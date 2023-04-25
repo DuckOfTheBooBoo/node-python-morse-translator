@@ -21,11 +21,23 @@ const init = async () => {
     path: '../templates',
   });
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => h.view('index'),
-  });
+  server.route([
+    {
+      method: 'GET',
+      path: '/',
+      handler: (request, h) => h.view('index'),
+    },
+    {
+      method: 'GET',
+      path: '/api/morsetotext',
+      handler: () => {},
+    },
+    {
+      method: 'GET',
+      path: '/api/texttomorse',
+      handler: () => {},
+    },
+  ]);
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
