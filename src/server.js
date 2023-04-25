@@ -11,7 +11,7 @@ const init = async () => {
     // eslint-disable-next-line global-require
     plugin: require('@hapi/vision'),
   });
-  
+
   server.views({
     engines: {
       // eslint-disable-next-line global-require
