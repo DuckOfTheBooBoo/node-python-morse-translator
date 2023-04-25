@@ -114,3 +114,7 @@ const CHAR_TO_MORSE_DICT = {
   '@': '.--.-.',
   ' ': '/',
 };
+
+function textToMorse(text) {}
+
+function morseToText(morse) {}
