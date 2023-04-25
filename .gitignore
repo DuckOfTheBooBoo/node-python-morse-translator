@@ -322,4 +322,7 @@ dist
 # ESLint Config
 .eslintrc.json
 
+# Nodemon config
+nodemon.json
+
 # End of https://www.toptal.com/developers/gitignore/api/node
