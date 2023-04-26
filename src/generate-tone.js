@@ -24,7 +24,11 @@ function intraCharSpace() {
   silence.start().stop(`+${0.05}`);
 }
 
-function interCharSpace() {}
+function interCharSpace() {
+  const silence = new Tone.Signal(0).toDestination();
+  silence.start().stop(`+${0.150}`);
+}
+
 function wordSpace() {}
 
 /**
