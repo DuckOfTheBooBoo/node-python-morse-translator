@@ -1,5 +1,5 @@
 const Hapi = require('@hapi/hapi');
-const { getTextToMorse } = require('./handler');
+const { getTextToMorse, getMorseToText } = require('./handler');
 
 const init = async () => {
 
@@ -32,6 +32,11 @@ const init = async () => {
       method: 'GET',
       path: '/api/texttomorse',
       handler: getTextToMorse,
+    },
+    {
+      method: 'GET',
+      path: '/api/morsetotext',
+      handler: getMorseToText,
     },
   ]);
 
