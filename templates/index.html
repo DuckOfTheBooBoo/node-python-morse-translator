@@ -112,7 +112,10 @@
                         if (response.ok) {
                             return response.json();
                         } else {
-                            throw new Error('Failed to fetch data.');
+                            const responseData = response.json()
+                                .then(data => {
+                                    throw new Error(data.message);
+                                });
                         }
                     })
                     .then(data => {
@@ -129,6 +132,27 @@
             if (inText.value !== '') {
                 inText.value = '';
             }
+
+            if (inMorse.value !== '') {
+                fetch(`http://localhost:8000/api/morsetotext?data=${inMorse.value}`)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            const responseData = response.json()
+                                .then(data => {
+                                    throw new Error(data.message);
+                                });
+                        }
+                    })
+                    .then(data => {
+                        inText.value = data.data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                inText.value = '';
+            }
+
         });
 
 
