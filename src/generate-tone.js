@@ -21,15 +21,27 @@ function playDash() {
 
 function intraCharSpace() {
   const silence = new Tone.Signal(0).toDestination();
-  silence.start().stop(`+${0.05}`);
+  silence.start();
+  Tone.Transport.scheduleOnce(() => {
+    silence.stop();
+  }, `+${0.05}`);
 }
 
 function interCharSpace() {
   const silence = new Tone.Signal(0).toDestination();
-  silence.start().stop(`+${0.150}`);
+  silence.start();
+  Tone.Transport.scheduleOnce(() => {
+    silence.stop();
+  }, `+${0.150}`);
 }
 
-function wordSpace() {}
+function wordSpace() {
+  const silence = new Tone.Signal(0).toDestination();
+  silence.start();
+  Tone.Transport.scheduleOnce(() => {
+    silence.stop();
+  }, `+${0.350}`);
+}
 
 /**
  * 
