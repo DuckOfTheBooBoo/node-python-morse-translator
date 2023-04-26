@@ -1,7 +1,9 @@
 /* eslint-disable import/extensions */
 import Hapi from '@hapi/hapi';
-import Handlebars from 'handlebars';
 import vision from '@hapi/vision';
+import inert from '@hapi/inert';
+import Handlebars from 'handlebars';
+import mime from 'mime';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {
@@ -14,16 +16,24 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const init = async () => {
 
+  // SERVER
   const server = Hapi.server({
     port: 8000,
     host: 'localhost',
+    routes: {
+      files: {
+        relativeTo: __dirname,
+      },
+    },
   });
 
-  await server.register({
-    // eslint-disable-next-line global-require
-    plugin: vision,
-  });
+  // REGISTER
+  await server.register([
+    vision,
+    inert,
+  ]);
 
+  // VIEWS
   server.views({
     engines: {
       // eslint-disable-next-line global-require
@@ -33,11 +43,29 @@ const init = async () => {
     path: '../templates',
   });
 
+  // EXT
+  server.ext('onPostHandler', (request, h) => {
+    const { response } = request;
+
+    if (response.isBoom || response.type !== 'text/html') {
+      return h.continue;
+    }
+    response.type(mime.getType(request.path));
+    return h.continue;
+  });
+
+  // ROUTES
   server.route([
     {
       method: 'GET',
       path: '/',
       handler: (request, h) => h.view('index'),
+    },
+    {
+      method: 'GET',
+      path: '/src/{param*}',
+      handler: (request, h) => h.file('./generate-tone.js'),
+      
     },
     {
       method: 'GET',
