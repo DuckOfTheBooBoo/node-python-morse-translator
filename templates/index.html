@@ -87,7 +87,7 @@
             </div>
 
             <div class="btn-play">
-                <button class="btn play" id="btn-play"><span class="bi bi-play"></span></button>
+                <button class="btn play" id="btn-play" disabled><span class="bi bi-play"></span></button>
             </div>
         </div>
 
@@ -95,7 +95,7 @@
 
 
     <script>
-        
+    
         const playBtn = document.getElementById('btn-play');
         const inText = document.getElementById('txta-text');
         const inMorse = document.getElementById('txta-morse');
@@ -105,6 +105,20 @@
             if (inMorse.value !== '') {
                 inMorse.value = '';
             }
+
+            fetch(`http://localhost:8000/api/texttomorse?data=${inText.value}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch data.');
+                    }
+                })
+                .then(data => {
+                    inMorse.value = data.data;
+                })
+                .catch(error => console.error('Error:', error));
+            
         });
         
         inMorse.addEventListener('input', (event) => {
