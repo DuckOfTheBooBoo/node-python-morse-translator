@@ -106,19 +106,22 @@
                 inMorse.value = '';
             }
 
-            fetch(`http://localhost:8000/api/texttomorse?data=${inText.value}`)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to fetch data.');
-                    }
-                })
-                .then(data => {
-                    inMorse.value = data.data;
-                })
-                .catch(error => console.error('Error:', error));
-            
+            if (inText.value !== '') {
+                fetch(`http://localhost:8000/api/texttomorse?data=${inText.value}`)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to fetch data.');
+                        }
+                    })
+                    .then(data => {
+                        inMorse.value = data.data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                inMorse.value = '';
+            }
         });
         
         inMorse.addEventListener('input', (event) => {
