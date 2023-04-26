@@ -9,12 +9,11 @@ const FREQUENCY = 500;
 // INTER_CHAR_SPACE = AudioSegment.silent(duration=150)
 // WORD_SPACE = AudioSegment.silent(duration=350)
 
-const SYMBOL_DUR = {
-  '.': 50,
-  '-': 150,
-};
+function playDot() {
+  const osc = new Tone.Oscillator(FREQUENCY, 'sine').toDestination();
+  osc.start().stop(`+${0.05}`);
+}
 
-function playDot() {}
 function playDash() {}
 function intraCharSpace() {}
 function interCharSpace() {}
