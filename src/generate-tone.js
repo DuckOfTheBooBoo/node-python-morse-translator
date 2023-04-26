@@ -14,7 +14,11 @@ function playDot() {
   osc.start().stop(`+${0.05}`);
 }
 
-function playDash() {}
+function playDash() {
+  const osc = new Tone.Oscillator(FREQUENCY, 'sine').toDestination();
+  osc.start().stop(`+${0.150}`);
+}
+
 function intraCharSpace() {}
 function interCharSpace() {}
 function wordSpace() {}
