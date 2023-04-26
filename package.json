@@ -15,8 +15,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.27.5",
-    "mime": "^3.0.0",
-    "tone": "^14.7.77"
+    "mime": "^3.0.0"
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.1",

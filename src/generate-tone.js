@@ -1,13 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-import * as Tone from 'tone';
+import * as Tone from './tone.js';
 
 const FREQUENCY = 500;
-
-// DOT = Sine(500).to_audio_segment(duration=50)
-// DASH = Sine(500).to_audio_segment(duration=150)
-// INTRA_CHAR_SPACE = AudioSegment.silent(duration=50)
-// INTER_CHAR_SPACE = AudioSegment.silent(duration=150)
-// WORD_SPACE = AudioSegment.silent(duration=350)
 
 function playDot() {
   const osc = new Tone.Oscillator(FREQUENCY, 'sine').toDestination();
