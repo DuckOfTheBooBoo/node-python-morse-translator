@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 import Hapi from '@hapi/hapi';
 import vision from '@hapi/vision';
@@ -64,7 +65,11 @@ const init = async () => {
     {
       method: 'GET',
       path: '/src/{param*}',
-      handler: (request, h) => h.file('./generate-tone.js'),
+      handler: (request, h) => {
+        const { param } = request.params;
+        
+        return h.file(`./${param}`);
+      },
       
     },
     {
