@@ -55,7 +55,6 @@ const getMorseToText = (request, h) => {
       return response;
   
     } catch (err) {
-      console.error(err.message);
 
       response = h.response({
         status: 'fail',
