@@ -1,5 +1,5 @@
-const { objectKeys } = require('./utils');
-const { MorseCodeNotFound, MorseCodeError } = require('./morse-code-error');
+import { objectKeys } from './utils.js';
+import { MorseCodeError, MorseCodeNotFound } from './morse-code-error.js';
 
 /* eslint-disable quote-props */
 const MORSE_TO_CHAR = {
@@ -197,7 +197,7 @@ function morseToText(morseCodeString) {
   return '';
 }
 
-module.exports = {
+export {
   textToMorse,
   morseToText,
 };

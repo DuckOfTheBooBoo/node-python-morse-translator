@@ -1,5 +1,16 @@
-const Hapi = require('@hapi/hapi');
-const { getTextToMorse, getMorseToText } = require('./handler');
+/* eslint-disable import/extensions */
+import Hapi from '@hapi/hapi';
+import Handlebars from 'handlebars';
+import vision from '@hapi/vision';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import {
+  getTextToMorse,
+  getMorseToText,
+} from './handler.js';
+
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const init = async () => {
 
@@ -10,13 +21,13 @@ const init = async () => {
 
   await server.register({
     // eslint-disable-next-line global-require
-    plugin: require('@hapi/vision'),
+    plugin: vision,
   });
 
   server.views({
     engines: {
       // eslint-disable-next-line global-require
-      html: require('handlebars'),
+      html: Handlebars,
     },
     relativeTo: __dirname,
     path: '../templates',

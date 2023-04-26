@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import * as Tone from 'tone';
 
 const FREQUENCY = 500;
@@ -51,6 +51,10 @@ function generateMorseTone(morseCodeString) {
 
   for (let symbolIndex = 0; symbolIndex < morseCodeString.length; symbolIndex += 1) {
     const currSymbol = morseCodeString.charAt(symbolIndex);
-
   }
 }
+
+export {
+  playDot,
+  playDash,
+};

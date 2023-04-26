@@ -1,4 +1,4 @@
-const { textToMorse, morseToText } = require('./morse-code-convert');
+import { textToMorse, morseToText } from './morse-code-convert.js';
 
 const getTextToMorse = (request, h) => {
 
@@ -75,7 +75,7 @@ const getMorseToText = (request, h) => {
   return response;
 };
 
-module.exports = {
+export {
   getTextToMorse,
   getMorseToText,
 };

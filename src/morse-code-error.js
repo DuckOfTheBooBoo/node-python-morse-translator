@@ -19,7 +19,7 @@ class MorseCodeNotFound extends Error {
   }
 }
 
-module.exports = {
+export {
   MorseCodeError,
   MorseCodeNotFound,
 };
