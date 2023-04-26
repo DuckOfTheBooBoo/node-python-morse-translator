@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import { objectKeys } from './utils.js';
 import { MorseCodeError, MorseCodeNotFound } from './morse-code-error.js';
 
