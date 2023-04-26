@@ -2,18 +2,19 @@
   "name": "node-python-morse-translator",
   "version": "1.0.0",
   "description": "A web app that use Hapi.js as web framework and Python for morse code translating",
-  "main": "index.js",
   "scripts": {
     "start-dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js"
   },
+  "type": "module",
   "author": "Arajdian Altaf",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-html": "^7.1.0",
-    "eslint-plugin-import": "^2.27.5"
+    "eslint-plugin-import": "^2.27.5",
+    "tone": "^14.7.77"
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.1",
