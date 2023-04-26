@@ -19,7 +19,11 @@ function playDash() {
   osc.start().stop(`+${0.150}`);
 }
 
-function intraCharSpace() {}
+function intraCharSpace() {
+  const silence = new Tone.Signal(0).toDestination();
+  silence.start().stop(`+${0.05}`);
+}
+
 function interCharSpace() {}
 function wordSpace() {}
 
