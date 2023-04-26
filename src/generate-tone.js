@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-import * as Tone from './tone.js';
 
 const FREQUENCY = 500;
 
@@ -48,8 +49,3 @@ function generateMorseTone(morseCodeString) {
     const currSymbol = morseCodeString.charAt(symbolIndex);
   }
 }
-
-export {
-  playDot,
-  playDash,
-};
