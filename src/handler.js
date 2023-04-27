@@ -1,4 +1,34 @@
+import axios, { AxiosHeaders } from "axios";
 import { textToMorse, morseToText } from './morse-code-convert.js';
+
+const generateTone = (request, h) => {
+
+  const { data = '' } = request.query;
+  let response;
+
+  if (data) {
+    return axios.get(`http://127.0.0.1:9001/?data=${data}`)
+      .then((axiosResponse) => {
+        response = h.response(axiosResponse.data);
+        response.code(200);
+        return response;
+      })
+      .catch((error) => {
+        console.log('Response error');
+        response = h.response(error.response.data);
+        response.code(error.response.status);
+        return response;
+      });
+
+  }
+
+  response = h.response({
+    message: 'Error, no data query provided.',
+  });
+  response.code(400);
+  return response;
+  
+};
 
 const getTextToMorse = (request, h) => {
 
@@ -78,4 +108,5 @@ const getMorseToText = (request, h) => {
 export {
   getTextToMorse,
   getMorseToText,
+  generateTone,
 };

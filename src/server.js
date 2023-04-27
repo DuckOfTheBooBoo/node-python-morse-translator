@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import {
   getTextToMorse,
   getMorseToText,
+  generateTone,
 } from './handler.js';
 
 // eslint-disable-next-line no-underscore-dangle
@@ -83,6 +84,11 @@ const init = async () => {
       method: 'GET',
       path: '/api/morsetotext',
       handler: getMorseToText,
+    },
+    {
+      method: 'GET',
+      path: '/generateTone',
+      handler: generateTone,
     },
   ]);
 
