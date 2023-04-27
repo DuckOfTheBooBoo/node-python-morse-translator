@@ -12,7 +12,7 @@ def generateMorseTone():
 
     # Query Parameters
     args = request.args
-    if 'data' in args.keys():
+    if 'data' in args.keys() and args['data'] != '':
         audio = play_morse(args["data"])
         audio_stream = base64.b64encode(audio).decode('utf-8')
         return json.dumps({
