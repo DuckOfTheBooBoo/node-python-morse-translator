@@ -7,7 +7,7 @@ const generateTone = (request, h) => {
   let response;
 
   if (data) {
-    return axios.get(`http://127.0.0.1:9001/?data=${data}`)
+    return axios.get(`http://127.0.0.1:5000/?data=${data}`)
       .then((axiosResponse) => {
         response = h.response(axiosResponse.data);
         response.code(200);
