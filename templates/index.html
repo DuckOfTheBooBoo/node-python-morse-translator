@@ -99,7 +99,7 @@
         playBtn.addEventListener('click', () => {
 
             if (inMorse.value !== ''){
-                fetch(`http://localhost:5000/?data=${inMorse.value}`)
+                fetch(`http://localhost:9001/?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
