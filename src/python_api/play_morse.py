@@ -48,7 +48,7 @@ def play_morse(morse_code: str) -> AudioSegment:
                 morse_audio += WORD_SPACE   
                 audio_segment_visual.append("WORD_SPACE")
 
-        return morse_audio
+        return morse_audio.export(format="mp3").read()
     
     else:
         pass
