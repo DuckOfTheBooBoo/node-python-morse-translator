@@ -21,7 +21,7 @@ const init = async () => {
   // SERVER
   const server = Hapi.server({
     port: 9000,
-    host: 'localhost',
+    host: process.env.NODE_ENV !== 'prod' ? 'localhost' : '0.0.0.0',
     routes: {
       files: {
         relativeTo: __dirname,

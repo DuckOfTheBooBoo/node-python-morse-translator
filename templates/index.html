@@ -96,16 +96,15 @@
 
     </div>
     <script>
-
+        const host = window.location.hostname;
         const morseCopyBtn = document.getElementById('btn-copy-morse');
         const playBtn = document.getElementById('btn-play');
         const inText = document.getElementById('txta-text');
         const inMorse = document.getElementById('txta-morse');
         
         playBtn.addEventListener('click', () => {
-
             if (inMorse.value !== ''){
-                fetch(`http://localhost:9000/generateTone?data=${inMorse.value}`)
+                fetch(`http://${host}:9000/generateTone?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
@@ -133,7 +132,7 @@
             }
 
             if (inText.value !== '') {
-                fetch(`http://localhost:9000/api/texttomorse?data=${inText.value}`)
+                fetch(`http://${host}:9000/api/texttomorse?data=${inText.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
@@ -160,7 +159,7 @@
             }
 
             if (inMorse.value !== '') {
-                fetch(`http://localhost:9000/api/morsetotext?data=${inMorse.value}`)
+                fetch(`http://${host}:9000/api/morsetotext?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
