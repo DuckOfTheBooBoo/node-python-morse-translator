@@ -29,4 +29,4 @@ def generateMorseTone():
     
     
 if __name__ == '__main__':
-    app.run(host='localhost', port=9001)
+    app.run(host='localhost', port=5000)
