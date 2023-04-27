@@ -104,7 +104,7 @@
         
         playBtn.addEventListener('click', () => {
             if (inMorse.value !== ''){
-                fetch(`http://${host}:9000/generateTone?data=${inMorse.value}`)
+                fetch(`http://${host}/generateTone?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
@@ -132,7 +132,7 @@
             }
 
             if (inText.value !== '') {
-                fetch(`http://${host}:9000/api/texttomorse?data=${inText.value}`)
+                fetch(`http://${host}/api/texttomorse?data=${inText.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
@@ -159,7 +159,7 @@
             }
 
             if (inMorse.value !== '') {
-                fetch(`http://${host}:9000/api/morsetotext?data=${inMorse.value}`)
+                fetch(`http://${host}/api/morsetotext?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
