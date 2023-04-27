@@ -19,7 +19,7 @@ const init = async () => {
 
   // SERVER
   const server = Hapi.server({
-    port: 8000,
+    port: 9000,
     host: 'localhost',
     routes: {
       files: {
@@ -64,13 +64,15 @@ const init = async () => {
     },
     {
       method: 'GET',
-      path: '/src/{param*}',
+      path: '/{param}/{param1*}',
       handler: (request, h) => {
-        const { param } = request.params;
+        const { param1, param } = request.params;
         
-        return h.file(`./${param}`);
+        if (param === 'static') {
+          return h.file(`./static/${param1}`);
+        }
+        return '';
       },
-      
     },
     {
       method: 'GET',
