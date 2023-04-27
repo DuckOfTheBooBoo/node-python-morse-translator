@@ -61,6 +61,10 @@
             margin-bottom: 20px;
             font-size: 20px;
         }
+
+        .top-part h2 {
+            margin-top: 10px;
+        }
     </style>
     <title>Morse Code Translator</title>
 </head>
@@ -77,6 +81,7 @@
             <div class="top-part">
                 <h2>
                     Morse Code
+                    <button class="btn copy" id="btn-copy-morse"><span class="bi bi-clipboard"></span></button>
                 </h2>
             </div>
 
@@ -92,6 +97,7 @@
     </div>
     <script>
 
+        const morseCopyBtn = document.getElementById('btn-copy-morse');
         const playBtn = document.getElementById('btn-play');
         const inText = document.getElementById('txta-text');
         const inMorse = document.getElementById('txta-morse');
@@ -173,6 +179,13 @@
                 inText.value = '';
             }
 
+        });
+
+        morseCopyBtn.addEventListener('click', () => {
+            inMorse.select();
+            inMorse.setSelectionRange(0, 99999);
+
+            document.execCommand('copy');
         });
 
     </script>
