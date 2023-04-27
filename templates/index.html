@@ -97,9 +97,27 @@
         const inMorse = document.getElementById('txta-morse');
         
         playBtn.addEventListener('click', () => {
-            const morseCodeSequence = generateMorseTone(inMorse.value);
-            morseCodeSequence.start();
-                        
+
+            if (inMorse.value !== ''){
+                fetch(`http://localhost:5000/?data=${inMorse.value}`)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            const responseData = response.json()
+                                .then(data => {
+                                    throw new Error(data.message);
+                                });
+                        }
+                    })
+                    .then(data => {
+                        const audio = document.createElement('audio');
+                        audio.src = data.data;
+                        document.body.appendChild(audio);
+                        audio.play();
+                    })
+                    .catch(error => console.error(error));
+            }   
         });
 
         inText.addEventListener('input', (event) => {
@@ -109,7 +127,7 @@
             }
 
             if (inText.value !== '') {
-                fetch(`http://localhost:8000/api/texttomorse?data=${inText.value}`)
+                fetch(`http://localhost:9000/api/texttomorse?data=${inText.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
@@ -136,7 +154,7 @@
             }
 
             if (inMorse.value !== '') {
-                fetch(`http://localhost:8000/api/morsetotext?data=${inMorse.value}`)
+                fetch(`http://localhost:9000/api/morsetotext?data=${inMorse.value}`)
                     .then(response => {
                         if (response.ok) {
                             return response.json();
