@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders } from "axios";
+import axios from 'axios';
 import { textToMorse, morseToText } from './morse-code-convert.js';
 
 const generateTone = (request, h) => {
