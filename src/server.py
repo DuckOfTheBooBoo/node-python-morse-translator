@@ -5,7 +5,7 @@ from io import BytesIO
 import json, base64
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 @app.route("/generateMorseTone", methods=['GET'])
 def generateMorseTone():
@@ -29,4 +29,4 @@ def generateMorseTone():
     
     
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000)
+    app.run(host='localhost', port=5000, debug=True)
