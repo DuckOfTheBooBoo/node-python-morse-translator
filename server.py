@@ -40,10 +40,37 @@ def api_text_to_morse():
             "message": "Error, no data query provided."
         }), 400
 
+@app.route("/api/morsetotext", method=['GET'])
+def api_morse_to_text():
+
+    args = request.args
+
+    try:
+        data = args["data"]
+
+        if data != '':
+            try:
+                result = morse_to_text(data)
+
+                return json.dumps({
+                    "status": "success",
+                    "data": result
+                }), 200
+
+            except MorseCodeError as morse_error:
+                return json.dumps({
+                    "message": morse_error
+                }), 400
+
+    # Return 400 if no data query provided
+    except KeyError:
+        return json.dumps({
+            "message": "Error, no data query provided."
+        }), 400
 
 
 @app.route("/generateMorseTone", methods=['GET'])
-def generateMorseTone():
+def generate_morse_tone():
 
     # Query Parameters
     args = request.args
