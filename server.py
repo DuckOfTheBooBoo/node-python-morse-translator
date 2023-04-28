@@ -1,11 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_cors import CORS
-from play_morse import play_morse
+from src.play_morse import play_morse
 from io import BytesIO
 import json, base64
 
 app = Flask(__name__)
 # CORS(app)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/generateMorseTone", methods=['GET'])
 def generateMorseTone():
