@@ -1,15 +1,46 @@
 from flask import Flask, request, render_template
 from flask_cors import CORS
 from src.play_morse import play_morse
+from src.morse_code import text_to_morse, morse_to_text
+from src.morse_code_error import MorseCodeError, MorseCodeNotFound
 from io import BytesIO
 import json, base64
 
 app = Flask(__name__)
-# CORS(app)
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/api/texttomorse", methods=['GET'])
+def api_text_to_morse():
+
+    args = request.args
+
+    try:
+        data = args["data"]
+
+        if data != '':
+            try:
+                result = text_to_morse(data)
+
+                return json.dumps({
+                    "status": "success",
+                    "data": result
+                }), 200
+
+            except MorseCodeNotFound as not_found_error:
+                return json.dumps({
+                    "message": not_found_error
+                }), 400
+
+    # Return 400 if no data query provided
+    except KeyError:
+        return json.dumps({
+            "message": "Error, no data query provided."
+        }), 400
+
+
 
 @app.route("/generateMorseTone", methods=['GET'])
 def generateMorseTone():
