@@ -299,6 +299,7 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+.vscode
 
 # yarn v2
 .yarn/cache
@@ -502,5 +503,7 @@ pyrightconfig.json
 
 # Python virtual env
 python_env
+
+# 
 
 # End of https://www.toptal.com/developers/gitignore/api/python
