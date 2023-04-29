@@ -111,12 +111,12 @@
                 textCount.style.color = 'black';
                 
                 fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
-                .then(data => {
-                    inMorse.value = data.data;
-                })
-                .catch(error => console.error('Error:', error));
+                    .then(data => {
+                        inMorse.value = data.data;
+                    })
+                    .catch(error => console.error('Error:', error));
                 
-                // If TRUE
+            // If TRUE
             } else {
                 textCount.style.color = 'red';
             }
@@ -125,18 +125,23 @@
         
         inMorse.addEventListener('input', (event) => {
 
+            morseCount.textContent = `${inMorse.value.length} / 600`;
+
             if (inText.value !== '') {
                 inText.value = '';
             }
 
-            if (inMorse.value !== '') {
+            if (!charCounter(inMorse.value, 600)) {
+                morseCount.style.color = 'black';
+
                 fetchData(`http://${host}/api/morsetotext?data=${inMorse.value}`)
                     .then(data => {
                         inText.value = data.data;
                     })
                     .catch(error => console.error('Error:', error));
+
             } else {
-                inText.value = '';
+                morseCount.style.color = 'red';
             }
 
         });
