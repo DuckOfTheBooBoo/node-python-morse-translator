@@ -1,4 +1,4 @@
-# node-python-morse-translator
+# python-morse-translator
 
 A web app translating text to morse code and vice versa. 
 
