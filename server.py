@@ -40,7 +40,7 @@ def api_text_to_morse():
             "message": "Error, no data query provided."
         }), 400
 
-@app.route("/api/morsetotext", method=['GET'])
+@app.route("/api/morsetotext", methods=['GET'])
 def api_morse_to_text():
 
     args = request.args
@@ -69,7 +69,7 @@ def api_morse_to_text():
         }), 400
 
 
-@app.route("/generateMorseTone", methods=['GET'])
+@app.route("/generateTone", methods=['GET'])
 def generate_morse_tone():
 
     # Query Parameters
@@ -91,4 +91,4 @@ def generate_morse_tone():
     
     
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='localhost', port=5000, debug=True, use_reloader=True)
