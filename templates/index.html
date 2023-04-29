@@ -59,11 +59,9 @@
                     <a class="btn download" id="btn-download"><span class="bi bi-download"></span></a>
                 </div>
             </div>
-
-
-
     </div>
 
+    <script src="../src/char-counter.js"></script>
     <script>
         function fetchData(url) {
             return fetch(url)
@@ -84,6 +82,8 @@
         const playBtn = document.getElementById('btn-play');
         const inText = document.getElementById('txta-text');
         const inMorse = document.getElementById('txta-morse');
+        const textCount = document.getElementById('text-count');
+        const morseCount = document.getElementById('morse-count');
         
         playBtn.addEventListener('click', () => {
             if (inMorse.value !== ''){
@@ -97,22 +97,30 @@
                     .catch(error => console.error(error));
             }   
         });
-
+        
         inText.addEventListener('input', (event) => {
-
+            
+            textCount.textContent = `${inText.value.length} / 100`;
+            // Check if Text Textarea has reached the character limit
+            // If FALSE
             if (inMorse.value !== '') {
                 inMorse.value = '';
             }
 
-            if (inText.value !== '') {
+            if (!charCounter(inText.value, 100)) {
+                textCount.style.color = 'black';
+                
                 fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
-                    .then(data => {
-                        inMorse.value = data.data;
-                    })
-                    .catch(error => console.error('Error:', error));
+                .then(data => {
+                    inMorse.value = data.data;
+                })
+                .catch(error => console.error('Error:', error));
+                
+                // If TRUE
             } else {
-                inMorse.value = '';
+                textCount.style.color = 'red';
             }
+
         });
         
         inMorse.addEventListener('input', (event) => {
