@@ -20,7 +20,7 @@ const init = async () => {
 
   // SERVER
   const server = Hapi.server({
-    port: 80,
+    port: process.env.NODE_ENV !== 'prod' ? 9000 : 80,
     host: process.env.NODE_ENV !== 'prod' ? 'localhost' : '0.0.0.0',
     routes: {
       files: {
