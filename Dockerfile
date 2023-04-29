@@ -8,4 +8,3 @@ RUN npm i .
 RUN chmod +x ./start_servers.sh
 EXPOSE 80
 ENTRYPOINT ./start_servers.sh
-

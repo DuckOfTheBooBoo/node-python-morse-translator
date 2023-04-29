@@ -503,4 +503,6 @@ pyrightconfig.json
 # Python virtual env
 python_env
 
+.vscode
+
 # End of https://www.toptal.com/developers/gitignore/api/python
