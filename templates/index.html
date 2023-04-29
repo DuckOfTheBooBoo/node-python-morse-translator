@@ -53,7 +53,25 @@
             margin-bottom: 20px;
         }
 
+        .util-btn-container {
+            text-align: center;
+        }
+
+        .btn-play, .btn-download {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
         .btn-play button {
+            background-color: rgb(239, 237, 237);
+            width: fit-content;
+            height: fit-content;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .btn-download a {
             background-color: rgb(239, 237, 237);
             width: fit-content;
             height: fit-content;
@@ -71,9 +89,12 @@
 <body>
     <div class="container">
         <div class="text-container">
-            <h2>Text</h2>
+            <h2>
+                Text
+                <button class="btn copy" id="btn-copy-text"><span class="bi bi-clipboard"></span></button>
+            </h2>
             <div class="form-outline">
-                <textarea class="form-control" cols="30" rows="3" id="txta-text"></textarea>
+                <textarea class="form-control" maxlength="200" cols="30" rows="3" id="txta-text"></textarea>
             </div>
         </div>
         
@@ -89,10 +110,17 @@
                 <textarea class="form-control" cols="30" rows="3" id="txta-morse"></textarea>
             </div>
 
-            <div class="btn-play">
-                <button class="btn play" id="btn-play"><span class="bi bi-play"></span></button>
+            <div class="util-btn-container">
+                <div class="btn-play">
+                    <button class="btn play" id="btn-play"><span class="bi bi-play"></span></button>
+                </div>
+    
+                <div class="btn-download">
+                    <a class="btn download" id="btn-download"><span class="bi bi-download"></span></a>
+                </div>
             </div>
-        </div>
+
+
 
     </div>
     <script>
