@@ -13,13 +13,17 @@
     <div class="container">
         <div class="text-container">
             <div class="text-top-heading">
-                <h2>
-                    Text
-                    <button class="btn copy" id="btn-copy-text"><span class="bi bi-clipboard"></span></button>
-                </h2>
+                <div class="left-column">
+                    <h2>
+                        Text
+                        <button class="btn copy" id="btn-copy-text"><span class="bi bi-clipboard"></span></button>
+                    </h2>
+                </div>
 
-                <div class="text-counter">
-
+                <div class="right-column">
+                    <div class="text-counter">
+                        <h5 id="text-count">0 / 100</h5>
+                    </div>
                 </div>
             </div>
             <div class="form-outline">
@@ -28,11 +32,18 @@
         </div>
         
         <div class="morse-container">
-            <div class="top-part">
-                <h2>
-                    Morse Code
-                    <button class="btn copy" id="btn-copy-morse"><span class="bi bi-clipboard"></span></button>
-                </h2>
+            <div class="morse-top-heading">
+                <div class="left-column">
+                    <h2>
+                        Morse Code
+                        <button class="btn copy" id="btn-copy-morse"><span class="bi bi-clipboard"></span></button>
+                    </h2>
+                </div>
+                <div class="right-column">
+                    <div class="morse-counter">
+                        <h5 id="morse-count">0 / 600</h5>
+                    </div>
+                </div>
             </div>
 
             <div class="form-outline">
