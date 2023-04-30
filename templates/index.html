@@ -41,7 +41,7 @@
                 </div>
                 <div class="right-column">
                     <div class="morse-counter">
-                        <h5 id="morse-count">0 / 600</h5>
+                        <h5 id="morse-count">0 / 300</h5>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
 
             <div class="util-btn-container">
                 <div class="btn-play">
-                    <button class="btn play" id="btn-play"><span class="bi bi-play"></span></button>
+                    <button class="btn play" id="btn-play" disabled><span class="bi bi-play"></span></button>
                 </div>
     
                 <div class="btn-download">
@@ -113,6 +113,7 @@
                 fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
                     .then(data => {
                         inMorse.value = data.data;
+                        playBtn.disabled = false;
                     })
                     .catch(error => console.error('Error:', error));
                 
@@ -125,18 +126,19 @@
         
         inMorse.addEventListener('input', (event) => {
 
-            morseCount.textContent = `${inMorse.value.length} / 600`;
+            morseCount.textContent = `${inMorse.value.length} / 300`;
 
             if (inText.value !== '') {
                 inText.value = '';
             }
 
-            if (!charCounter(inMorse.value, 600)) {
+            if (!charCounter(inMorse.value, 300)) {
                 morseCount.style.color = 'black';
 
                 fetchData(`http://${host}/api/morsetotext?data=${inMorse.value}`)
                     .then(data => {
                         inText.value = data.data;
+                        playBtn.disabled = false;
                     })
                     .catch(error => console.error('Error:', error));
 
