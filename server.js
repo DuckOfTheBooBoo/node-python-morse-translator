@@ -15,6 +15,7 @@ import {
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const ALLOWED_STATIC_FILE = ['char-counter.js', 'style.css'];
 
 const init = async () => {
 
@@ -69,7 +70,16 @@ const init = async () => {
       handler: (request, h) => {
         const { param, param1 } = request.params;
         
-        return h.file(`${param}/${param1}`);
+        if ((param === 'src' || param === 'styles') && (ALLOWED_STATIC_FILE.includes(param1))) {
+          return h.file(`${param}/${param1}`);
+        }
+
+        const response = h.response({
+          status: 'fail',
+          message: 'Forbidden. You are not authorized to access this resource.',
+        });
+        response.code(403);
+        return response;
       },
     },
     {
