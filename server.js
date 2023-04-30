@@ -11,7 +11,7 @@ import {
   getTextToMorse,
   getMorseToText,
   generateTone,
-} from './handler.js';
+} from './src/handler.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -42,7 +42,7 @@ const init = async () => {
       html: Handlebars,
     },
     relativeTo: __dirname,
-    path: '../templates',
+    path: './templates',
   });
 
   // EXT
@@ -67,12 +67,9 @@ const init = async () => {
       method: 'GET',
       path: '/{param}/{param1*}',
       handler: (request, h) => {
-        const { param1, param } = request.params;
+        const { param, param1 } = request.params;
         
-        if (param === 'static') {
-          return h.file(`./static/${param1}`);
-        }
-        return '';
+        return h.file(`${param}/${param1}`);
       },
     },
     {
