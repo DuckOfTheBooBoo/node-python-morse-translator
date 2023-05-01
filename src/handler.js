@@ -7,17 +7,18 @@ const generateTone = (request, h) => {
   let response;
 
   if (data) {
-    return axios.get(`http://127.0.0.1:5000/?data=${data}`)
+    return axios.get(`http://127.0.0.1:5001/?data=${data}`)
       .then((axiosResponse) => {
         response = h.response(axiosResponse.data);
         response.code(200);
         return response;
       })
       .catch((error) => {
+
         console.log('Response error');
-        response = h.response(error.response.data);
-        response.code(error.response.status);
-        return response;
+        // response = h.response(error.response.data);
+        // response.code(error.response.status);
+        return error;
       });
 
   }
