@@ -89,6 +89,7 @@
     <script src="../src/download-wav.js"></script>
     <script>
         const host = window.location.host;
+        const textCopyBtn = document.getElementById('btn-copy-text');
         const morseCopyBtn = document.getElementById('btn-copy-morse');
         const playBtn = document.getElementById('btn-play');
         const downloadBtn = document.getElementById('btn-download');
@@ -188,6 +189,13 @@
                 }
             }
 
+        });
+
+        textCopyBtn.addEventListener('click', () => {
+            inText.select();
+            inText.setSelectionRange(0, 99999);
+
+            document.execCommand('copy');
         });
 
         morseCopyBtn.addEventListener('click', () => {

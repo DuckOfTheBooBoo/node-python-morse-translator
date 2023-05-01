@@ -1,6 +1,6 @@
 {
   "name": "node-python-morse-translator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A web app that use Hapi.js as web framework and Python for morse code translating",
   "scripts": {
     "start-dev": "nodemon ./server.js",
