@@ -16,6 +16,7 @@ import {
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ALLOWED_STATIC_FILE = ['char-counter.js', 'style.css'];
+const ALLOWED_STATIC_DIR = ['src', 'styles'];
 
 const init = async () => {
 
@@ -70,7 +71,7 @@ const init = async () => {
       handler: (request, h) => {
         const { param, param1 } = request.params;
         
-        if ((param === 'src' || param === 'styles') && (ALLOWED_STATIC_FILE.includes(param1))) {
+        if ((ALLOWED_STATIC_DIR.includes(param)) && (ALLOWED_STATIC_FILE.includes(param1))) {
           return h.file(`${param}/${param1}`);
         }
 
