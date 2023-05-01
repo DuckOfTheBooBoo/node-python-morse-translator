@@ -72,9 +72,12 @@
                             return response;
                         }
 
-                        // const responseData = response.json();
-                        throw new Error(response.statusText);
-                        return response;
+                        const responseData = response.json()
+                            .then(data => {
+                                throw new Error(data.message);
+                            })
+                            .catch(error => console.error(error));
+                        return responseData;
 
                     } else {
                         return response.json();
@@ -112,47 +115,56 @@
             textCount.textContent = `${inText.value.length} / 100`;
             // Check if Text Textarea has reached the character limit
             // If FALSE
+
             if (inMorse.value !== '') {
                 inMorse.value = '';
             }
 
-            if (!charCounter(inText.value, 100)) {
-                textCount.style.color = 'black';
-                
-                fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
-                    .then(data => {
-                        inMorse.value = data.data !== undefined ? data.data : '';
-                        playBtn.disabled = false;
-                    })
-                    .catch(error => console.error('Error:', error));
-                
-            // If TRUE
-            } else {
-                textCount.style.color = 'red';
+            if (inText.value !== '') {
+
+    
+                if (!charCounter(inText.value, 100)) {
+                    textCount.style.color = 'black';
+                    
+                    fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
+                        .then(data => {
+                            inMorse.value = data !== undefined ? data.data : '';
+                            playBtn.disabled = data !== undefined ? false : true;
+                        })
+                        .catch(error => console.error('Error:', error));
+                    
+                // If TRUE
+                } else {
+                    textCount.style.color = 'red';
+                }
             }
 
         });
         
         inMorse.addEventListener('input', (event) => {
-
             morseCount.textContent = `${inMorse.value.length} / 300`;
 
             if (inText.value !== '') {
                 inText.value = '';
             }
 
-            if (!charCounter(inMorse.value, 300)) {
-                morseCount.style.color = 'black';
+            if (inMorse.value !== '') {
 
-                fetchData(`http://${host}/api/morsetotext?data=${inMorse.value}`)
-                    .then(data => {
-                        inText.value = data.data !== undefined ? data.data : '';
-                        playBtn.disabled = false;
-                    })
-                    .catch(error => console.error('Error:', error));
-
-            } else {
-                morseCount.style.color = 'red';
+    
+    
+                if (!charCounter(inMorse.value, 300)) {
+                    morseCount.style.color = 'black';
+    
+                    fetchData(`http://${host}/api/morsetotext?data=${inMorse.value}`)
+                        .then(data => {
+                            inText.value = data !== undefined ? data.data : '';
+                            playBtn.disabled = data !== undefined ? false : true;
+                        })
+                        .catch(error => console.error('Error:', error));
+    
+                } else {
+                    morseCount.style.color = 'red';
+                }
             }
 
         });
