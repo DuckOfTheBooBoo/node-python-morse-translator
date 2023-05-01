@@ -5,6 +5,7 @@ import vision from '@hapi/vision';
 import inert from '@hapi/inert';
 import Handlebars from 'handlebars';
 import mime from 'mime';
+import { spawn } from 'child_process';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {
@@ -15,7 +16,7 @@ import {
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ALLOWED_STATIC_FILE = ['char-counter.js', 'style.css'];
+const ALLOWED_STATIC_FILE = ['char-counter.js', 'style.css', 'download-wav.js'];
 const ALLOWED_STATIC_DIR = ['src', 'styles'];
 
 const init = async () => {
@@ -99,6 +100,27 @@ const init = async () => {
       handler: generateTone,
     },
   ]);
+
+  // Executing Python API Server
+  const pythonProcess = spawn('python', ['./src/python_api/api.py', '5000']);
+
+  // Handler for exit event
+  process.on('exit', () => {
+    console.log('Node.js process is exiting. Terminating Python API server...');
+    pythonProcess.kill('SIGTERM');
+  });
+
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`Python API: ${data}`);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Python API error: ${data}`);
+  });
+
+  pythonProcess.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+  });
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
