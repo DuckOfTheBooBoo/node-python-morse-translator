@@ -56,7 +56,7 @@
                 </div>
     
                 <div class="btn-download">
-                    <a class="btn download" id="btn-download"><span class="bi bi-download"></span></a>
+                    <button class="btn download" id="btn-download" disabled><span class="bi bi-download"></span></a>
                 </div>
             </div>
     </div>
@@ -86,20 +86,41 @@
                 .catch(error => console.error(error));
         }
     </script>
+    <script src="../src/download-wav.js"></script>
     <script>
         const host = window.location.host;
         const morseCopyBtn = document.getElementById('btn-copy-morse');
         const playBtn = document.getElementById('btn-play');
+        const downloadBtn = document.getElementById('btn-download');
         const inText = document.getElementById('txta-text');
         const inMorse = document.getElementById('txta-morse');
         const textCount = document.getElementById('text-count');
         const morseCount = document.getElementById('morse-count');
-        
+        let url;
+        let link;
+
+        downloadBtn.addEventListener('click', () => {
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        })
+
         playBtn.addEventListener('click', () => {
             if (inMorse.value !== ''){
                 fetchData(`http://${host}/generateTone?data=${inMorse.value}`)
                     .then(data => {
                         if (data) {
+
+                            // Make download href
+                            const downloadData = downloadWav(data.data);
+                            link = downloadData[0];
+                            url = downloadData[1];
+                            
+                            downloadBtn.disabled = false;
+
+
+                            // Make audio element
                             const audio = document.createElement('audio');
                             audio.src = data.data;
                             document.body.appendChild(audio);
