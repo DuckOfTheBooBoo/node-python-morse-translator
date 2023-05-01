@@ -4,10 +4,11 @@ import { textToMorse, morseToText } from './morse-code-convert.js';
 const generateTone = (request, h) => {
 
   const { data = '' } = request.query;
+  const apiPort = process.env.API_PORT;
   let response;
 
   if (data) {
-    return axios.get(`http://127.0.0.1:5001/?data=${data}`)
+    return axios.get(`http://127.0.0.1:${apiPort}/?data=${data}`)
       .then((axiosResponse) => {
         response = h.response(axiosResponse.data);
         response.code(200);
