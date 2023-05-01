@@ -67,13 +67,20 @@
             return fetch(url)
                 .then(response => {
                     if (!response.ok) {
-                        const responseData = response.json();
-                        throw new Error(data.message);
-                    }
+                        if (response.status === 500) {
+                            throw new Error(response.statusText + ' Morse Code API might be down.');
+                            return response;
+                        }
 
-                    return response.json();
+                        // const responseData = response.json();
+                        throw new Error(response.statusText);
+                        return response;
+
+                    } else {
+                        return response.json();
+                    }
                 })
-                .catch(error => console.error('Error: ', error));
+                .catch(error => console.error(error));
         }
     </script>
     <script>
@@ -89,10 +96,12 @@
             if (inMorse.value !== ''){
                 fetchData(`http://${host}/generateTone?data=${inMorse.value}`)
                     .then(data => {
-                        const audio = document.createElement('audio');
-                        audio.src = data.data;
-                        document.body.appendChild(audio);
-                        audio.play();
+                        if (data) {
+                            const audio = document.createElement('audio');
+                            audio.src = data.data;
+                            document.body.appendChild(audio);
+                            audio.play();
+                        }
                     })
                     .catch(error => console.error(error));
             }   
@@ -112,7 +121,7 @@
                 
                 fetchData(`http://${host}/api/texttomorse?data=${inText.value}`)
                     .then(data => {
-                        inMorse.value = data.data;
+                        inMorse.value = data.data !== undefined ? data.data : '';
                         playBtn.disabled = false;
                     })
                     .catch(error => console.error('Error:', error));
@@ -137,7 +146,7 @@
 
                 fetchData(`http://${host}/api/morsetotext?data=${inMorse.value}`)
                     .then(data => {
-                        inText.value = data.data;
+                        inText.value = data.data !== undefined ? data.data : '';
                         playBtn.disabled = false;
                     })
                     .catch(error => console.error('Error:', error));
